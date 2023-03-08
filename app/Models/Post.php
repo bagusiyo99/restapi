@@ -10,7 +10,7 @@ class Post extends Model
 {
     use HasFactory;
     protected $fillable =[
-        'title', 'news_content', 'author'
+        'title', 'new_content', 'author'
     ];
 
     public function writer(): BelongsTo
