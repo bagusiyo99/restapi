@@ -15,9 +15,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        // with harus diluar sedangkan loadMissing di dalam
+        $posts = Post::with('writer:id,username')->get();
         // return response()->json($posts);
-        return PostResource::collection($posts);
+        return PostDetailResource::collection($posts);
     }
 
 
@@ -50,4 +51,28 @@ class PostController extends Controller
 
         // return response()->json('bisa di akses');
      }
+
+    public function update (Request $request ,$id) 
+    {
+        $validated = $request->validate([
+        'title' => 'required|max:255',
+        'new_content' => 'required',
+    ]);
+
+        $post = Post::FindOrFail($id);
+        $post->update ($request->all());
+
+            return new PostDetailResource ($post->loadMissing('writer:id,username'));
+
+    }
+
+    public function destory ($id) 
+    {
+        $post = Post::FindOrFail($id);
+        $post->delete();
+
+            return new PostDetailResource ($post->loadMissing('writer:id,username'));
+
+    }
+
 }
