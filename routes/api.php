@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthenticationController;
-
+use App\Http\Controllers\CommentController;
 
 // contoh middleware satu
 // Route::get('/me',  [AuthenticationController::class, 'me'])->middleware(['auth:sanctum']);
@@ -15,9 +15,12 @@ use App\Http\Controllers\AuthenticationController;
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/logout',  [AuthenticationController::class, 'logout']);
     Route::get('/me',  [AuthenticationController::class, 'me']);
-Route::post('/posts',  [PostController::class, 'store']);
-Route::patch('/posts/{id}',  [PostController::class, 'update'])->middleware('Pemilikpostingan');
-Route::delete('/posts/{id}',  [PostController::class, 'destory'])->middleware('Pemilikpostingan');
+    Route::post('/posts',  [PostController::class, 'store']);
+    Route::patch('/posts/{id}',  [PostController::class, 'update'])->middleware('Pemilikpostingan');
+    Route::delete('/posts/{id}',  [PostController::class, 'destory'])->middleware('Pemilikpostingan');
+
+        Route::post('/comment',  [CommentController::class, 'store']);
+
 
 });
 
