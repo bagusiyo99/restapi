@@ -19,7 +19,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::patch('/posts/{id}',  [PostController::class, 'update'])->middleware('Pemilikpostingan');
     Route::delete('/posts/{id}',  [PostController::class, 'destory'])->middleware('Pemilikpostingan');
 
-        Route::post('/comment',  [CommentController::class, 'store']);
+    Route::post('/comment',  [CommentController::class, 'store']);
+    Route::patch('/comment/{id}',  [CommentController::class, 'update'])->middleware('pemilikkomentar');
+    Route::delete('/comment/{id}',  [CommentController::class, 'destory'])->middleware('pemilikkomentar');
 
 
 });
